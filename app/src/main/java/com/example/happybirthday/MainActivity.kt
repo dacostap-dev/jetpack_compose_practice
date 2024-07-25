@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,7 +38,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Article()
+                    TaskComplete(modifier = Modifier.fillMaxSize())
                 }
 
             }
@@ -102,7 +103,7 @@ fun Article(modifier: Modifier = Modifier) {
             painter = painterResource(id = R.drawable.bg_compose_background),
             contentDescription = null,
             contentScale = ContentScale.FillWidth,
-            )
+        )
         Text(
             text = stringResource(id = R.string.article_title),
             fontSize = 24.sp,
@@ -125,10 +126,34 @@ fun Article(modifier: Modifier = Modifier) {
 }
 
 
+@Composable
+fun TaskComplete(modifier: Modifier = Modifier) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier,
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_task_completed),
+            contentDescription = stringResource(R.string.image_success_description)
+        )
+        Text(
+            text = stringResource(R.string.message_text),
+            fontWeight = FontWeight.Bold,
+            //Usamos directamente Modifier para no acumular y que afecte a la columna
+            modifier = Modifier.padding(top = 24.dp, bottom = 8.dp, end = 0.dp, start = 0.dp),
+        )
+        Text(
+            text = stringResource(R.string.congrats_text),
+            fontSize = 16.sp
+        )
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun BirthdayCardPreview() {
     HappyBirthdayTheme {
-        Article()
+        TaskComplete()
     }
 }
