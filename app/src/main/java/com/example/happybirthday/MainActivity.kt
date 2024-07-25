@@ -37,10 +37,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GreetingImage(
-                        message = stringResource(R.string.happy_birthday_text),
-                        from = stringResource(R.string.signature_text),
-                    )
+                    Article()
                 }
 
             }
@@ -55,7 +52,7 @@ fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Bottom,
         modifier = Modifier,
 
-    ) {
+        ) {
         Text(
             text = message,
             fontSize = 100.sp,
@@ -98,13 +95,40 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
 }
 
 
+@Composable
+fun Article(modifier: Modifier = Modifier) {
+    Column(modifier) {
+        Image(
+            painter = painterResource(id = R.drawable.bg_compose_background),
+            contentDescription = null,
+            contentScale = ContentScale.FillWidth,
+            )
+        Text(
+            text = stringResource(id = R.string.article_title),
+            fontSize = 24.sp,
+            modifier = modifier.padding(16.dp)
+        )
+        Text(
+            text = stringResource(id = R.string.article_subtitle),
+            fontSize = 16.sp,
+            textAlign = TextAlign.Justify,
+            modifier = modifier.padding(16.dp)
+        )
+        Text(
+            text = stringResource(id = R.string.article_content),
+            fontSize = 16.sp,
+            textAlign = TextAlign.Justify,
+            modifier = modifier.padding(16.dp)
+
+        )
+    }
+}
+
+
 @Preview(showBackground = true)
 @Composable
 fun BirthdayCardPreview() {
     HappyBirthdayTheme {
-        GreetingImage(
-            message = stringResource(R.string.happy_birthday_text), //Usar stringResource composable en lugar de getString()
-            from = stringResource(R.string.signature_text),
-        )
+        Article()
     }
 }
