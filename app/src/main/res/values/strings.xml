@@ -8,7 +8,18 @@
     <string name="article_content">
         In this tutorial, you build a simple UI component with declarative functions. You call Compose functions to say what elements you want and the Compose compiler does the rest. Compose is built around Composable functions. These functions let you define your app\'s UI programmatically because they let you describe how it should look and provide data dependencies, rather than focus on the process of the UI\'s construction, such as initializing an element and then attaching it to a parent. To create a Composable function, you add the @Composable annotation to the function name.
     </string>
+
     <string name="message_text">All task completed</string>
     <string name="congrats_text">Nice work!</string>
     <string name="image_success_description">complete task icon</string>
+
+    <string name="grid_item_title_one">Text composable</string>
+    <string name="grid_item_desc_one">Displays text and follows the recommended Material Design guidelines.</string>
+    <string name="grid_item_title_two">Image composable</string>
+    <string name="grid_item_desc_two">Creates a composable that lays out and draws a given Painter class object.</string>
+    <string name="grid_item_title_three">Row composable</string>
+    <string name="grid_item_desc_three">A layout composable that places its children in a horizontal sequence.</string>
+    <string name="grid_item_title_four">Column composable</string>
+    <string name="grid_item_desc_four">A layout composable that places its children in a vertical sequence.</string>
+
 </resources>

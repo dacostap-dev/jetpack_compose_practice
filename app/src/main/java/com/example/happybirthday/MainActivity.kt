@@ -5,12 +5,18 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+
 import androidx.compose.foundation.layout.fillMaxSize
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.MaterialTheme
 
 import androidx.compose.material3.Surface
@@ -18,7 +24,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -38,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    TaskComplete(modifier = Modifier.fillMaxSize())
+                    GridTask(modifier = Modifier.fillMaxSize())
                 }
 
             }
@@ -150,10 +158,87 @@ fun TaskComplete(modifier: Modifier = Modifier) {
     }
 }
 
+
+data class ItemModel(val title: String, val description: String, val color: Color)
+
+@Composable
+fun GridTask(modifier: Modifier = Modifier) {
+
+    val itemList = listOf(
+        ItemModel(
+            title = stringResource(id = R.string.grid_item_title_one),
+            description = stringResource(
+                id = R.string.grid_item_desc_one
+            ),
+            color = Color(0xFFEADDFF),
+        ),
+        ItemModel(
+            title = stringResource(id = R.string.grid_item_title_two),
+            description = stringResource(
+                id = R.string.grid_item_desc_two
+            ),
+            color = Color(0xFFD0BCFF),
+        ),
+        ItemModel(
+            title = stringResource(id = R.string.grid_item_title_three),
+            description = stringResource(
+                id = R.string.grid_item_desc_three
+            ),
+            color = Color(0xFFB69DF8),
+        ),
+        ItemModel(
+            title = stringResource(id = R.string.grid_item_title_four),
+            description = stringResource(
+                id = R.string.grid_item_desc_four
+            ),
+            color = Color(0xFFF6EDFF),
+        ),
+    )
+
+    LazyVerticalGrid(columns = GridCells.Fixed(2), modifier = modifier) {
+        items(itemList) { item ->
+            GridItem(
+                title = item.title,
+                description = item.description,
+                color = item.color,
+            )
+
+
+        }
+    }
+}
+
+@Composable
+fun GridItem(title: String, description: String, color: Color, modifier: Modifier = Modifier) {
+    val configuration = LocalConfiguration.current
+    val screenHeight = configuration.screenHeightDp.dp
+
+    // Definir el tamaño del item como la mitad del ancho de la pantalla
+    val itemSize = screenHeight / 2
+
+
+
+    Column(
+        modifier = modifier
+            .size(itemSize)
+            .background(color = color)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+
+        ) {
+        Text(
+            text = title,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 10.dp)
+        )
+        Text(text = description)
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun BirthdayCardPreview() {
     HappyBirthdayTheme {
-        TaskComplete()
+        GridTask(modifier = Modifier.fillMaxSize())
     }
 }
