@@ -9,6 +9,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 
 import androidx.compose.foundation.layout.fillMaxSize
 
@@ -17,6 +19,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.outlined.Call
+import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 
 import androidx.compose.material3.Surface
@@ -34,6 +42,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import com.example.happybirthday.ui.theme.HappyBirthdayTheme
 
 class MainActivity : ComponentActivity() {
@@ -46,7 +55,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GridTask(modifier = Modifier.fillMaxSize())
+                    CardPresentation(modifier = Modifier.fillMaxSize())
                 }
 
             }
@@ -235,10 +244,62 @@ fun GridItem(title: String, description: String, color: Color, modifier: Modifie
     }
 }
 
+
+@Composable
+fun CardPresentation(modifier: Modifier = Modifier) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+            .padding(10.dp)
+            .background(Color(0xFF3ddc84))
+    ) {
+        HeaderSection()
+        Spacer(modifier = Modifier.size(20.dp))
+        ContactInformation()
+    }
+}
+
+@Composable
+fun HeaderSection(modifier: Modifier = Modifier) {
+    Column(modifier.padding(10.dp)) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+            contentDescription = "avatar image"
+        )
+        Text(text = "Daniel Acosta", fontWeight = FontWeight.Bold)
+        Text(text = "Un titulo")
+    }
+
+}
+
+@Composable
+fun ContactInformation(modifier: Modifier = Modifier) {
+    Column(modifier.padding(10.dp)) {
+        Row {
+            Icon(imageVector = Icons.Outlined.Call, contentDescription = null)
+            Spacer(modifier = Modifier.size(10.dp))
+            Text(text = "00 (00) 000 000")
+        }
+        Row {
+            Icon(imageVector = Icons.Outlined.Email, contentDescription = null)
+            Spacer(modifier = Modifier.size(10.dp))
+            Text(text = "@socialmediahandle")
+        }
+        Row {
+            Icon(imageVector = Icons.Outlined.Email, contentDescription = null)
+            Spacer(modifier = Modifier.size(10.dp))
+            Text(text = "email@hotmail.com")
+
+        }
+    }
+
+}
+
 @Preview(showBackground = true)
 @Composable
 fun BirthdayCardPreview() {
     HappyBirthdayTheme {
-        GridTask(modifier = Modifier.fillMaxSize())
+        CardPresentation(modifier = Modifier.fillMaxSize())
     }
 }
